@@ -20,11 +20,11 @@ public class Robot extends TimedRobot {
 
     public void robotInit() {
         Subsystems.compressor.start();
-        UserInterface.operatorController.A.whenPressed(new IntakeGrab());
-        UserInterface.operatorController.B.whenPressed(new IntakeRelease());
-        UserInterface.operatorController.X.whenPressed(new GuillotineHold());
-        UserInterface.operatorController.Y.whenPressed(new GuillotineKick());
-        UserInterface.operatorController.START.whenPressed(new IntakeBox());
+        UserInterface.operatorController.A.whenPressed(new IntakeGrab()); // intake arms open: A
+        UserInterface.operatorController.B.whenPressed(new IntakeRelease()); // intake arms close: B
+        UserInterface.operatorController.X.whenPressed(new GuillotineHold()); // kicker retracts: X
+        UserInterface.operatorController.Y.whenPressed(new GuillotineKick()); // kicker kicks out: Y
+        UserInterface.operatorController.START.whenPressed(new IntakeBox()); // entire programmed sequence: START
         camera = CameraServer.getInstance().startAutomaticCapture();
         Subsystems.arduino.sendCommand("0001111");
         Subsystems.guillotine.zeroLiftPosition();
@@ -69,12 +69,12 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Subsystems.guillotine.setLiftSpeed(0.0d);
         if (UserInterface.operatorController.getLeftJoystickY() < -.1d) {
-            Subsystems.intake.release();
+            Subsystems.intake.release(); // if controller left joystick goes up, arms release
             Subsystems.guillotine.setLiftSpeed(1.0d);
         } else if (UserInterface.operatorController.getLeftJoystickY() > .1d) {
             Subsystems.guillotine.setLiftSpeed(-0.4d);
             if (Subsystems.guillotine.getLowerSwitchValue()) {
-                Subsystems.guillotine.kick();
+                Subsystems.guillotine.kick(); // when going down with the left joystick, if all the way down, kick cube
             }
         }
         Subsystems.intake.setArmsSpeed(0.0d);
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
         }
         Subsystems.intake.setPivotSpeed(0.0d);
         if (UserInterface.operatorController.getRightJoystickY() < -0.1d) {
-            Subsystems.guillotine.kick();
+            Subsystems.guillotine.kick(); // kicker open if intake pivot goes up
             Subsystems.intake.setPivotSpeed(0.6);
         } else if (UserInterface.operatorController.getRightJoystickY() > 0.1d) {
             Subsystems.intake.setPivotSpeed(-0.2);

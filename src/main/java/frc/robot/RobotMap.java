@@ -25,16 +25,16 @@ public class RobotMap {
     public static final int lift = (compBot) ? 11 : 56;
 
     // Double Solenoid Values
-    public static final int intakeForward = 5;
-    public static final int intakeReverse = 3;
-    public static final int kickerForward = (compBot) ? 4 : 2;
-    public static final int kickerReverse = (compBot) ? 2 : 4;
+    public static final int intakeForward = 5; // one of two intake ports
+    public static final int intakeReverse = 3; // one of two intake ports
+    public static final int kickerForward = (compBot) ? 4 : 2; // one of two kicker ports
+    public static final int kickerReverse = (compBot) ? 2 : 4; // one of two kicker ports
 
     // Digital IO Ports
-    public static final int intakeUpperSwitch = (compBot) ? 4 : 5;
-    public static final int intakeLowerSwitch = (compBot) ? 5 : 4;
-    public static final int guillotineUpperSwitch = 2;
-    public static final int guillotineLowerSwitch = 3;
+    public static final int intakeUpperSwitch = (compBot) ? 4 : 5; // switch at max intake up
+    public static final int intakeLowerSwitch = (compBot) ? 5 : 4; // switch at rest, lowest point of pivot
+    public static final int guillotineUpperSwitch = 2; // switch at max elevator up
+    public static final int guillotineLowerSwitch = 3; // switch at rest, lowest point
 //    public static final int BEAM_BRAKE = 6;
 
     // Analog IO Ports
