@@ -7,11 +7,11 @@ public class ArduinoController {
     private SerialPort port;
 
     public ArduinoController() {
-        // this.port = new SerialPort(9600, SerialPort.Port.kUSB1); Apparently used for LEDs - not necessary
+        this.port = new SerialPort(9600, SerialPort.Port.kUSB1); // Apparently used for LEDs - not necessary
     }
 
     public void sendCommand(String command) {
-        // port.writeString("!" + command); Same as above - this entire file is for LEDs
+        port.writeString("!" + command); // Same as above - this entire file is for LEDs
     }
 
 }

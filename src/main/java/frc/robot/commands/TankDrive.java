@@ -3,6 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+//DO NOT CHANGE OR ELSE WE WILL PURSUE YOU AND THROW ROCKS AND BRANDISH FIREY TORCHES
 
 public class TankDrive extends Command {
 
@@ -10,7 +13,8 @@ public class TankDrive extends Command {
     // private double rightSpeed = 0;
     private double updatedSpeed = 0;
     private double updatedRotation = 0;
-    private static final double maxChange = 0.06d;
+    private static final double maxChangeSpeed = 0.035d;
+    private static final double maxChangeRotation = 0.2d;
 
     public TankDrive() {
         super("TankDrive");
@@ -46,13 +50,18 @@ public class TankDrive extends Command {
             speed = 0.0d;
         }
         double speedDifference = speed - updatedSpeed;
-        if (speedDifference > maxChange) {
-            speed = updatedSpeed + maxChange;
-        } else if (speedDifference < -maxChange) {
-            speed = updatedSpeed - maxChange;
+        if (speedDifference > maxChangeSpeed) {
+            speed = updatedSpeed + maxChangeSpeed;
+            System.out.print("Ridsfon Speed");
+
+        } else if (speedDifference < -maxChangeSpeed) {
+            speed = updatedSpeed - maxChangeSpeed;
+            System.out.print("tidsfon Speed");
+
         }
+        speed *= 1;
         updatedSpeed = speed;
-        double rotation;
+
         // if (UserInterface.driverController.getLeftJoystickX() < -.1) {
         //     rotation = Math.pow(UserInterface.driverController.getLeftJoystickX(), 2);
         // } else if (UserInterface.driverController.getLeftJoystickX() > .1) {
@@ -60,17 +69,30 @@ public class TankDrive extends Command {
         // } else {
         //     rotation = 0.0d;
         // }
+        double rotation;
         rotation = -Math.pow(UserInterface.driverController.getLeftJoystickX(), 3);
         double rotationDifference = rotation - updatedRotation;
-        if (rotationDifference > maxChange) {
-            rotation = updatedRotation + maxChange;
-        } else if (speedDifference < -maxChange) {
-            rotation = updatedRotation - maxChange;
+
+        if (rotationDifference > maxChangeRotation) {
+            rotation = updatedRotation + maxChangeRotation;
+            System.out.print("Rotatidsfon Speed");
+
+        } else if (rotationDifference < -maxChangeRotation) {
+            rotation = updatedRotation - maxChangeRotation;
+            System.out.print("Rotatidsfon Speed");
+
         }
+        rotation *= 0.7;
         updatedRotation = rotation;
         // Subsystems.driveBase.arcadeDrive.arcadeDrive(speed, rotation, false);
- 
+        
+        SmartDashboard.putNumber("Motor Speed", speed);
+        SmartDashboard.putNumber("Rotation Speed", rotation);
+        SmartDashboard.putNumber("Speed Difference", speedDifference);
+        
+
         Subsystems.driveBase.cheesyDrive.curvatureDrive(rotation, speed, true);
+
     }
 
     @Override

@@ -20,8 +20,8 @@ public class Robot extends TimedRobot {
 
     public void robotInit() {
         Subsystems.compressor.start();
-        UserInterface.operatorController.A.whenPressed(new IntakeGrab()); // intake arms open: A
-        UserInterface.operatorController.B.whenPressed(new IntakeRelease()); // intake arms close: B
+        UserInterface.operatorController.A.whenPressed(new IntakeGrab()); // intake arms close: A
+        UserInterface.operatorController.B.whenPressed(new IntakeRelease()); // intake arms open: B
         UserInterface.operatorController.X.whenPressed(new GuillotineHold()); // kicker retracts: X
         UserInterface.operatorController.Y.whenPressed(new GuillotineKick()); // kicker kicks out: Y
         UserInterface.operatorController.START.whenPressed(new IntakeBox()); // entire programmed sequence: START
@@ -107,5 +107,6 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Right Arm Current", Subsystems.intake.getRightArmCurrent());
         SmartDashboard.putNumber("Xbox POV", UserInterface.operatorController.getPOVAngle());
         SmartDashboard.putNumber("Gyro Angle", Subsystems.driveBase.getGyroAngle());
+
     }
 }

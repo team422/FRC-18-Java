@@ -18,6 +18,7 @@ public class GuillotineRaise extends Command {
     @Override
     public void execute() {
         Subsystems.guillotine.setLiftSpeed(0.9d);
+        Subsystems.intake.release();
     }
 
     @Override
