@@ -30,6 +30,17 @@ public class Robot extends TimedRobot {
         Subsystems.guillotine.zeroLiftPosition();
     }
 
+    // intake arms close: A
+    // intake arms open: B
+    // kicker retracts: X
+    // kicker kicks out: Y
+    // entire programmed sequence: START
+    // Right trigger: intake wheels
+    // Left trigger: outake wheels
+    // Left joystick: rotation
+    // Right joystick: forwards and backwards
+    // Ensure that guillotine is completely down before beginning START
+
     public void disabledInit() {
         Subsystems.arduino.sendCommand("0001111");
     }
