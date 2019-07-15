@@ -41,9 +41,9 @@ public class RobotMap {
     public static final int intakeUltrasonic = 3;
 
     // UI Ports
-    public static final int operatorXboxController = 2;
-    public static final int driverXboxController = 1;
-    public static final int launchpad  = 0;
+    public static final int operatorXboxController = 0;
+    public static final int leftJoystick = 2;
+    public static final int rightJoystick = 3;
 
 
 

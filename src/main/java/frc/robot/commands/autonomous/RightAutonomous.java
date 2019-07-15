@@ -23,7 +23,7 @@ public class RightAutonomous extends CommandGroup {
             addSequential(new DriveStraight(16, 0.5f, false, 1.5f));
             addParallel(new GuillotineLower());
             addParallel(new PivotIntakeDown(0.75d));
-        } else if (gameData.charAt(1) == 'L' && scale && !UserInterface.launchpad.getSwitch2()) {
+        // } else if (gameData.charAt(1) == 'L' && scale && !UserInterface.launchpad.getSwitch2()) {
             // Opposite side scale auto
             // If switch 2 is up, disable this mode
             addSequential(new DriveStraight(190.438, 0.9, true, 5.0d));

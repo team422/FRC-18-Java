@@ -49,13 +49,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().removeAll();
         Subsystems.arduino.sendCommand("0005551");
         String gameData = DriverStation.getInstance().getGameSpecificMessage();
-        if (UserInterface.launchpad.getMultiSwitchLeft()) {
-            autonomous = new LeftAutonomous(gameData, UserInterface.launchpad.getSwitch1());
-        } else if (UserInterface.launchpad.getMultiSwitchInactive()) {
-            autonomous = new CenterAutonomous(gameData.charAt(0));
-        } else if (UserInterface.launchpad.getMultiSwitchRight()) {
-            autonomous = new RightAutonomous(gameData, UserInterface.launchpad.getSwitch1());
-        }
+        //choose autonomous???
         autonomous.start();
     }
 

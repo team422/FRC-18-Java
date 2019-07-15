@@ -37,10 +37,6 @@ public class DriveBase extends Subsystem {
     SpeedControllerGroup leftSide;
     SpeedControllerGroup rightSide;
 
-    public DifferentialDrive splitDrive;
-    public DifferentialDrive arcadeDrive;
-    public DifferentialDrive cheesyDrive;
-
     public DriveBase() {
         super("DriveBase");
         this.leftMasterMotor = new WPI_TalonSRX(RobotMap.leftMasterMotor);
@@ -64,10 +60,6 @@ public class DriveBase extends Subsystem {
 
         this.leftSide = new SpeedControllerGroup(leftMasterMotor, leftFollower1, leftFollower2);
         this.rightSide = new SpeedControllerGroup(rightMasterMotor, rightFollower1, rightFollower2);
-
-        this.splitDrive = new DifferentialDrive(leftSide, rightSide); 
-        this.arcadeDrive = new DifferentialDrive(leftSide, rightSide);
-        this.cheesyDrive = new DifferentialDrive(leftSide, rightSide);
         
         leftMasterMotor.setInverted(true);
         leftFollower1.setInverted(true);

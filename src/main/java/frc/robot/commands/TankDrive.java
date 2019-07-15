@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TankDrive extends Command {
 
-    private double updatedSpeed = 0;
-    private double updatedRotation = 0;
-    private static final double maxChangeSpeed = 0.035d;
-    private static final double maxChangeRotation = 0.2d;
+    private double updatedLeftSpeed = 0;
+    private double updatedRightSpeed = 0;
+    private static final double maxChangeSpeed = 0.2;
+    private static final double speedCap = 0.8;
 
     public TankDrive() {
         super("TankDrive");
@@ -19,46 +19,40 @@ public class TankDrive extends Command {
 
     @Override
     protected void execute() {
-        double speed;
-        if (UserInterface.driverController.getRightJoystickY() < -.1) {
-            speed = -Math.pow(UserInterface.driverController.getRightJoystickY(), 2);
-        } else if (UserInterface.driverController.getRightJoystickY() > .1) {
-            speed = Math.pow(UserInterface.driverController.getRightJoystickY(), 2);
-        } else {
-            speed = 0.0d;
+
+        double leftSpeed = UserInterface.leftJoystick.getJoystickY();
+        double rightSpeed = UserInterface.rightJoystick.getJoystickY();
+        boolean rightTrigger = UserInterface.rightJoystick.TRIGGER.get();
+
+        if (rightTrigger) {
+            leftSpeed = rightSpeed;
+        } 
+
+        double speedDifferenceRight = rightSpeed - updatedRightSpeed;
+        if (speedDifferenceRight > maxChangeSpeed) {
+            rightSpeed = updatedRightSpeed + maxChangeSpeed;
+
+        } else if (speedDifferenceRight < -maxChangeSpeed) {
+            rightSpeed = updatedRightSpeed - maxChangeSpeed;
         }
-        double speedDifference = speed - updatedSpeed;
-        if (speedDifference > maxChangeSpeed) {
-            speed = updatedSpeed + maxChangeSpeed;
 
-        } else if (speedDifference < -maxChangeSpeed) {
-            speed = updatedSpeed - maxChangeSpeed;
+        double speedDifferenceLeft = leftSpeed - updatedLeftSpeed;
+        if (speedDifferenceLeft > maxChangeSpeed) {
+            leftSpeed = updatedLeftSpeed + maxChangeSpeed;
 
+        } else if (speedDifferenceLeft < -maxChangeSpeed) {
+            leftSpeed = updatedLeftSpeed - maxChangeSpeed;
         }
-        speed *= 1;
-        updatedSpeed = speed;
 
-        double rotation;
-        rotation = -Math.pow(UserInterface.driverController.getLeftJoystickX(), 3);
-        double rotationDifference = rotation - updatedRotation;
+        updatedLeftSpeed = leftSpeed;
+        updatedRightSpeed = rightSpeed;
 
-        if (rotationDifference > maxChangeRotation) {
-            rotation = updatedRotation + maxChangeRotation;
+        Subsystems.driveBase.setMotors(leftSpeed * speedCap, rightSpeed * speedCap);
 
-        } else if (rotationDifference < -maxChangeRotation) {
-            rotation = updatedRotation - maxChangeRotation;
-
-        }
-        rotation *= 0.7;
-        updatedRotation = rotation;
-        
-        SmartDashboard.putNumber("Motor Speed", speed);
-        SmartDashboard.putNumber("Rotation Speed", rotation);
-        SmartDashboard.putNumber("Speed Difference", speedDifference);
-        
-
-        Subsystems.driveBase.cheesyDrive.curvatureDrive(rotation, speed, true);
-
+        SmartDashboard.putNumber("Right Speed", rightSpeed);
+        SmartDashboard.putNumber("Left Speed", leftSpeed);
+        SmartDashboard.putNumber("Speed Difference Right", speedDifferenceRight);
+        SmartDashboard.putNumber("Speed Difference Left", speedDifferenceLeft);
     }
 
     @Override
