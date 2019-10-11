@@ -64,12 +64,35 @@ public class Robot extends TimedRobot {
     }
 
     public void teleopInit() {
-        if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            Subsystems.arduino.sendCommand("0003331");
-        } else {
-            Subsystems.arduino.sendCommand("0002221");
+        // if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+        //     Subsystems.arduino.sendCommand("0003331");
+        // } else {
+        //     Subsystems.arduino.sendCommand("0002221");
+        // }
+        while (true) {
+            Subsystems.arduino.sendCommand("0002290");
+            Subsystems.arduino.sendCommand("0002785");
+            Subsystems.arduino.sendCommand("0003264");
+            Subsystems.arduino.sendCommand("0003744");
+            Subsystems.arduino.sendCommand("0003953");
+            Subsystems.arduino.sendCommand("0003922");
+            Subsystems.arduino.sendCommand("0003892");
+            Subsystems.arduino.sendCommand("0003862");
+            Subsystems.arduino.sendCommand("0003337");
+            Subsystems.arduino.sendCommand("0002827");
+            Subsystems.arduino.sendCommand("0002317");
+            Subsystems.arduino.sendCommand("0001823");
+            Subsystems.arduino.sendCommand("0001087");
+            Subsystems.arduino.sendCommand("0000607");
+            Subsystems.arduino.sendCommand("0000383");
+            Subsystems.arduino.sendCommand("0000174");
+            Subsystems.arduino.sendCommand("0000205");
+            Subsystems.arduino.sendCommand("0000234");
+            Subsystems.arduino.sendCommand("0000760");
+            Subsystems.arduino.sendCommand("0001270");
+            Subsystems.arduino.sendCommand("0001780");
         }
-        Scheduler.getInstance().removeAll();
+       //  Scheduler.getInstance().removeAll();
     }
 
     public void disabledPeriodic() {
