@@ -30,6 +30,8 @@ public class Robot extends TimedRobot {
         camera = CameraServer.getInstance().startAutomaticCapture();
         Subsystems.arduino.sendCommand("0001111");
         Subsystems.guillotine.zeroLiftPosition();
+
+        Rotations = new Rotations();
         
     }
 
@@ -55,7 +57,7 @@ public class Robot extends TimedRobot {
         // if (UserInterface.launchpad.getMultiSwitchLeft()) {
         //     autonomous = new LeftAutonomous(gameData, UserInterface.launchpad.getSwitch1());
         // } else if (UserInterface.launchpad.getMultiSwitchInactive()) {
-        //     autonomous = new CenterAutonomous(gameData.charAt(0));
+        //     autonomous = new CenterAutonomous(gameData.charAt(0));
         // } else if (UserInterface.launchpad.getMultiSwitchRight()) {
         //     autonomous = new RightAutonomous(gameData, UserInterface.launchpad.getSwitch1());
         // }

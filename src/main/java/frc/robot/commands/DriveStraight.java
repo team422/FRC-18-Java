@@ -9,15 +9,18 @@ public class DriveStraight extends Command {
     private double ticks;
     private boolean forward;
     private double speed;
+    private double timeout;
 
     // private int covertToTicks(double inches)
 
     public DriveStraight(double inches, double Speed, boolean Forward, double Timeout) {
         super("DriveStraight");
         requires(Subsystems.driveBase);
+        setTimeout(Timeout);
         ticks = convertToTicks(inches);
         forward = Forward;
         speed = Speed;
+        // timeout = Timeout;
     }
 
     @Override
@@ -32,11 +35,17 @@ public class DriveStraight extends Command {
         double correction = Subsystems.driveBase.getGyroAngle();
         correction *= 0.075;
         correction += 1.0;
+        System.out.print(timeSinceInitialized());
         if (forward) {
             Subsystems.driveBase.setMotors(-speed, -speed * correction);
         } else {
             Subsystems.driveBase.setMotors(speed * correction, speed);
         }
+        // if (timeSinceInitialized() >= timeout){
+        //     isFinished();
+        //     SmartDashboard.putString("messy","EVERYTHING IS FINEE");
+        // }
+
     }
 
     @Override
@@ -44,6 +53,15 @@ public class DriveStraight extends Command {
         int leftPosition = Math.abs(Subsystems.driveBase.getLeftPosition());
         int rightPosition = Math.abs(Subsystems.driveBase.getRightPosition());
         return (leftPosition > ticks) || (rightPosition > ticks) || isTimedOut();
+        
+        // if (timeSinceInitialized() >= timeout){
+        //     return true;
+        // }
+        // else {
+        //     SmartDashboard.putString("messy","EVERYTHING IS FINEE");
+        //     return false;
+            
+        // }
     }
 
     @Override

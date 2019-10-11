@@ -5,5 +5,12 @@
     "debugfile": "frcJava_roborio.debugconfig",
     "project": "1Java Code 2018",
     "language": "java"
+  },
+  {
+    "artifact": "frcJava (in project Rotations code Axiom)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "Rotations code Axiom",
+    "language": "java"
   }
 ]

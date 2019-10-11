@@ -85,8 +85,8 @@ public class DriveBase extends Subsystem {
     public void setMotors(double left, double right) {
         // leftMasterMotor.set(ControlMode.PercentOutput, left * 0.5);
         // rightMasterMotor.set(ControlMode.PercentOutput, right * 0.5);
-        leftSide.set(left*0.3);//see percent output above, think it's just be a master-follower thing?
-        rightSide.set(right*0.3);
+        leftSide.set(left);//see percent output above, think it's just be a master-follower thing?
+        rightSide.set(right);
     }
 
     public int getLeftPosition() {
