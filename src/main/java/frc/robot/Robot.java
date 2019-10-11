@@ -5,6 +5,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,7 +18,7 @@ public class Robot extends TimedRobot {
 
     private UsbCamera camera;
     private CommandGroup autonomous;
-    private Rotations rotations;
+    private Command Rotations;
 
     public void robotInit() {
         Subsystems.compressor.start();
@@ -29,8 +30,7 @@ public class Robot extends TimedRobot {
         camera = CameraServer.getInstance().startAutomaticCapture();
         Subsystems.arduino.sendCommand("0001111");
         Subsystems.guillotine.zeroLiftPosition();
-
-        rotations = new Rotations();
+        
     }
 
     // intake arms close: A
@@ -51,16 +51,16 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
         Subsystems.arduino.sendCommand("0005551");
-        String gameData = DriverStation.getInstance().getGameSpecificMessage();
-        if (UserInterface.launchpad.getMultiSwitchLeft()) {
-            autonomous = new LeftAutonomous(gameData, UserInterface.launchpad.getSwitch1());
-        } else if (UserInterface.launchpad.getMultiSwitchInactive()) {
-            autonomous = new CenterAutonomous(gameData.charAt(0));
-        } else if (UserInterface.launchpad.getMultiSwitchRight()) {
-            autonomous = new RightAutonomous(gameData, UserInterface.launchpad.getSwitch1());
-        }
-        //autonomous.start();
-        rotations.start();
+        // String gameData = DriverStation.getInstance().getGameSpecificMessage();
+        // if (UserInterface.launchpad.getMultiSwitchLeft()) {
+        //     autonomous = new LeftAutonomous(gameData, UserInterface.launchpad.getSwitch1());
+        // } else if (UserInterface.launchpad.getMultiSwitchInactive()) {
+        //     autonomous = new CenterAutonomous(gameData.charAt(0));
+        // } else if (UserInterface.launchpad.getMultiSwitchRight()) {
+        //     autonomous = new RightAutonomous(gameData, UserInterface.launchpad.getSwitch1());
+        // }
+        // autonomous.start();
+        Rotations.start();
     }
 
     public void teleopInit() {
