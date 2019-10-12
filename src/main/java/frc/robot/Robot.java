@@ -13,6 +13,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
+import java.util.concurrent.TimeUnit;
 
 public class Robot extends TimedRobot {
 
@@ -71,29 +72,7 @@ public class Robot extends TimedRobot {
         // } else {
         //     Subsystems.arduino.sendCommand("0002221");
         // }
-        while (true) {
-            Subsystems.arduino.sendCommand("0002290");
-            Subsystems.arduino.sendCommand("0002785");
-            Subsystems.arduino.sendCommand("0003264");
-            Subsystems.arduino.sendCommand("0003744");
-            Subsystems.arduino.sendCommand("0003953");
-            Subsystems.arduino.sendCommand("0003922");
-            Subsystems.arduino.sendCommand("0003892");
-            Subsystems.arduino.sendCommand("0003862");
-            Subsystems.arduino.sendCommand("0003337");
-            Subsystems.arduino.sendCommand("0002827");
-            Subsystems.arduino.sendCommand("0002317");
-            Subsystems.arduino.sendCommand("0001823");
-            Subsystems.arduino.sendCommand("0001087");
-            Subsystems.arduino.sendCommand("0000607");
-            Subsystems.arduino.sendCommand("0000383");
-            Subsystems.arduino.sendCommand("0000174");
-            Subsystems.arduino.sendCommand("0000205");
-            Subsystems.arduino.sendCommand("0000234");
-            Subsystems.arduino.sendCommand("0000760");
-            Subsystems.arduino.sendCommand("0001270");
-            Subsystems.arduino.sendCommand("0001780");
-        }
+
        //  Scheduler.getInstance().removeAll();
     }
 
@@ -107,6 +86,145 @@ public class Robot extends TimedRobot {
     }
 
     public void teleopPeriodic() {
+        //while (true) {
+            Subsystems.arduino.sendCommand("0002290");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0002785");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003264");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003744");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003953");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003922");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003892");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003862");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0003337");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0002827");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0002317");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0001823");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0001087");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0000607");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0000383");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0000174");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0000205");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0000234");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0000760");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0001270");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+            Subsystems.arduino.sendCommand("0001780");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+        //}
+
         Subsystems.guillotine.setLiftSpeed(0.0d);
         if (UserInterface.operatorController.getLeftJoystickY() < -.1d) {
             Subsystems.intake.release(); // if controller left joystick goes up, arms release
