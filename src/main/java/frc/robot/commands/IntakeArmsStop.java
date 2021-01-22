@@ -1,18 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 
-public class IntakeArmsStop extends Command {
+public class IntakeArmsStop extends CommandBase {
 
     public IntakeArmsStop() {
-        super("IntakeArmsOut");
-        requires(Subsystems.intake);
-    }
-
-    @Override
-    public void initialize() {
-
+        setName("IntakeArmsOut");
+        addRequirements(Subsystems.intake);
     }
 
     @Override
@@ -23,17 +18,6 @@ public class IntakeArmsStop extends Command {
     @Override
     public boolean isFinished() {
         return true;
-    }
-
-    @Override
-    public void interrupted() {
-
-    }
-
-
-    @Override
-    public void end() {
-
     }
 
 }

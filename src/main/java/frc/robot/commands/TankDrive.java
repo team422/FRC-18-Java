@@ -1,11 +1,11 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TankDrive extends Command {
+public class TankDrive extends CommandBase {
 
     private double updatedSpeed = 0;
     private double updatedRotation = 0;
@@ -13,12 +13,12 @@ public class TankDrive extends Command {
     private static final double maxChangeRotation = 0.2d;
 
     public TankDrive() {
-        super("TankDrive");
-        requires(Subsystems.driveBase);
+        setName("TankDrive");
+        addRequirements(Subsystems.driveBase);
     }
 
     @Override
-    protected void execute() {
+    public void execute() {
         double speed;
         if (UserInterface.driverController.getRightJoystickY() < -.1) {
             speed = -Math.pow(UserInterface.driverController.getRightJoystickY(), 2);
@@ -55,23 +55,8 @@ public class TankDrive extends Command {
         SmartDashboard.putNumber("Motor Speed", speed);
         SmartDashboard.putNumber("Rotation Speed", rotation);
         SmartDashboard.putNumber("Speed Difference", speedDifference);
-        
 
         Subsystems.driveBase.cheesyDrive.curvatureDrive(rotation, speed, true);
-
-    }
-
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
-
-    @Override
-    protected void interrupted() {
-    }
-
-    @Override
-    protected void end() {
     }
 
 }

@@ -1,18 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 
-public class IntakeGrab extends Command {
+public class IntakeGrab extends CommandBase {
 
     public IntakeGrab() {
-        super("IntakeGrab");
-        requires(Subsystems.intake);
-    }
-
-    @Override
-    public void initialize() {
-
+        setName("IntakeGrab");
+        addRequirements(Subsystems.intake);
     }
 
     @Override
@@ -25,15 +20,5 @@ public class IntakeGrab extends Command {
         return true;
     }
 
-    @Override
-    public void interrupted() {
-
-    }
-
-
-    @Override
-    public void end() {
-
-    }
-
 }
+

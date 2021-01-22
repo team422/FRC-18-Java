@@ -1,18 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 
-public class GuillotineHold extends Command {
+public class GuillotineHold extends CommandBase {
 
     public GuillotineHold() {
-        super("GuillotineHold");
-        requires(Subsystems.guillotine);
-    }
-
-    @Override
-    public void initialize() {
-
+        setName("GuillotineHold");
+        addRequirements(Subsystems.guillotine);
     }
 
     @Override
@@ -23,17 +18,6 @@ public class GuillotineHold extends Command {
     @Override
     public boolean isFinished() {
         return true;
-    }
-
-    @Override
-    public void interrupted() {
-
-    }
-
-
-    @Override
-    public void end() {
-
     }
 
 }

@@ -1,12 +1,11 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.*;
@@ -16,7 +15,7 @@ import frc.robot.userinterface.UserInterface;
 public class Robot extends TimedRobot {
 
     private UsbCamera camera;
-    private CommandGroup autonomous;
+    private CommandGroupBase autonomous;
 
     public void robotInit() {
         Subsystems.compressor.start();
@@ -46,7 +45,7 @@ public class Robot extends TimedRobot {
     }
 
     public void autonomousInit() {
-        Scheduler.getInstance().removeAll();
+        CommandScheduler.getInstance().cancelAll();
         Subsystems.arduino.sendCommand("0005551");
         String gameData = DriverStation.getInstance().getGameSpecificMessage();
         if (UserInterface.launchpad.getMultiSwitchLeft()) {
@@ -56,7 +55,7 @@ public class Robot extends TimedRobot {
         } else if (UserInterface.launchpad.getMultiSwitchRight()) {
             autonomous = new RightAutonomous(gameData, UserInterface.launchpad.getSwitch1());
         }
-        autonomous.start();
+        autonomous.schedule();
     }
 
     public void teleopInit() {
@@ -65,7 +64,7 @@ public class Robot extends TimedRobot {
         } else {
             Subsystems.arduino.sendCommand("0002221");
         }
-        Scheduler.getInstance().removeAll();
+        CommandScheduler.getInstance().cancelAll();
     }
 
     public void disabledPeriodic() {
@@ -73,7 +72,7 @@ public class Robot extends TimedRobot {
     }
     
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
+        CommandScheduler.getInstance().run();
         printDataToSmartDashboard();
     }
 
@@ -101,7 +100,7 @@ public class Robot extends TimedRobot {
         } else if (UserInterface.operatorController.getRightJoystickY() > 0.1d) {
             Subsystems.intake.setPivotSpeed(-0.2);
         }
-        Scheduler.getInstance().run();
+        CommandScheduler.getInstance().run();
         printDataToSmartDashboard();
     }
 
@@ -118,6 +117,5 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Right Arm Current", Subsystems.intake.getRightArmCurrent());
         SmartDashboard.putNumber("Xbox POV", UserInterface.operatorController.getPOVAngle());
         SmartDashboard.putNumber("Gyro Angle", Subsystems.driveBase.getGyroAngle());
-
     }
 }

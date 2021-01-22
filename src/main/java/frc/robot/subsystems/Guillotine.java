@@ -4,10 +4,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
-public class Guillotine extends Subsystem{
+public class Guillotine extends SubsystemBase {
 
     private DoubleSolenoid kicker;
     private TalonSRX lift;
@@ -15,15 +15,12 @@ public class Guillotine extends Subsystem{
     private DigitalInput lowerSwitch;
 
     public Guillotine() {
-        super("Guillotine");
+        setName("Guillotine");
         this.kicker = new DoubleSolenoid(RobotMap.kickerForward, RobotMap.kickerReverse);
         this.lift = new TalonSRX(RobotMap.lift);
         this.upperSwitch = new DigitalInput(RobotMap.guillotineUpperSwitch);
         this.lowerSwitch = new DigitalInput(RobotMap.guillotineLowerSwitch);
     }
-
-    @Override
-    protected void initDefaultCommand() {}
 
     public void hold() {
         kicker.set(DoubleSolenoid.Value.kForward);
@@ -53,7 +50,7 @@ public class Guillotine extends Subsystem{
         return !lowerSwitch.get();
     }
 
-    public int getLiftPosition() {
+    public double getLiftPosition() {
         return lift.getSelectedSensorPosition(0);
     }
 

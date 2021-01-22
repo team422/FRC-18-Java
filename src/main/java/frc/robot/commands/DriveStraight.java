@@ -1,20 +1,18 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Subsystems;
 
-public class DriveStraight extends Command {
+public class DriveStraight extends CommandBase {
 
     private double ticks;
     private boolean forward;
     private double speed;
 
-    // private int covertToTicks(double inches)
-
-    public DriveStraight(double inches, double Speed, boolean Forward, double Timeout) {
-        super("DriveStraight");
-        requires(Subsystems.driveBase);
+    public DriveStraight(double inches, double Speed, boolean Forward) {
+        setName("DriveStraight");
+        addRequirements(Subsystems.driveBase);
         ticks = convertToTicks(inches);
         forward = Forward;
         speed = Speed;
@@ -24,7 +22,7 @@ public class DriveStraight extends Command {
     public void initialize() {
         Subsystems.driveBase.zeroEncoderPosition();
         Subsystems.driveBase.zeroGyroAngle();
-        SmartDashboard.putString("messy","EVERYTHING IS FINEE");
+        SmartDashboard.putString("messy","EVERYTHING IS FINE");
     }
 
     @Override
@@ -41,19 +39,13 @@ public class DriveStraight extends Command {
 
     @Override
     public boolean isFinished() {
-        int leftPosition = Math.abs(Subsystems.driveBase.getLeftPosition());
-        int rightPosition = Math.abs(Subsystems.driveBase.getRightPosition());
-        return (leftPosition > ticks) || (rightPosition > ticks) || isTimedOut();
+        double leftPosition = Math.abs(Subsystems.driveBase.getLeftPosition());
+        double rightPosition = Math.abs(Subsystems.driveBase.getRightPosition());
+        return (leftPosition > ticks) || (rightPosition > ticks);
     }
 
     @Override
-    public void interrupted() {
-        Subsystems.driveBase.setMotors(0,0);
-    }
-
-
-    @Override
-    public void end() {
+    public void end(boolean interrupted) {
         Subsystems.driveBase.setMotors(0,0);
     }
 

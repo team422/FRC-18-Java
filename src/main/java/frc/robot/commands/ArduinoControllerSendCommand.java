@@ -1,13 +1,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 
-public class ArduinoControllerSendCommand extends Command {
+public class ArduinoControllerSendCommand extends CommandBase {
 
     public ArduinoControllerSendCommand() {
-        super("ArduinoControllerSendCommand");
+        setName("ArduinoControllerSendCommand");
     }
 
     @Override
@@ -18,27 +18,4 @@ public class ArduinoControllerSendCommand extends Command {
             Subsystems.arduino.sendCommand("0005256");
         }
     }
-
-    @Override
-    public void execute() {
-
-    }
-
-    @Override
-    public boolean isFinished() {
-        return true;
-    }
-
-    @Override
-    public void interrupted() {
-
-    }
-
-    @Override
-    public void end() {
-
-    }
-
-
-
 }

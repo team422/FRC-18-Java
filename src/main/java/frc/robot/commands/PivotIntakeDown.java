@@ -1,21 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 
-public class PivotIntakeDown extends Command {
+public class PivotIntakeDown extends CommandBase {
 
-    private double time;
-
-    public PivotIntakeDown(double Time) {
-        super("PivotIntakeDown");
-        requires(Subsystems.intake);
-        time = Time;
-    }
-
-    @Override
-    public void initialize() {
-
+    public PivotIntakeDown() {
+        setName("PivotIntakeDown");
+        addRequirements(Subsystems.intake);
     }
 
     @Override
@@ -25,21 +17,11 @@ public class PivotIntakeDown extends Command {
 
     @Override
     public boolean isFinished() {
-        if (time != 0.0d) {
-            return isTimedOut();
-        } else {
-            return Subsystems.intake.getUpperSwitchValue();
-        }
+        return Subsystems.intake.getUpperSwitchValue();
     }
 
     @Override
-    public void interrupted() {
-
-    }
-
-
-    @Override
-    public void end() {
+    public void end(boolean interrupted) {
         Subsystems.intake.setPivotSpeed(0.0d);
     }
 

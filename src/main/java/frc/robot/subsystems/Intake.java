@@ -5,10 +5,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
-public class Intake extends Subsystem {
+public class Intake extends SubsystemBase {
 
     private DoubleSolenoid grabber;
     private TalonSRX pivot;
@@ -20,7 +20,7 @@ public class Intake extends Subsystem {
 
 
     public Intake() {
-        super("Intake");
+        setName("Intake");
         this.grabber = new DoubleSolenoid(RobotMap.intakeForward, RobotMap.intakeReverse);
         this.pivot = new TalonSRX(RobotMap.intakePivot);
         this.leftArm = new TalonSRX(RobotMap.intakeLeftArm);
@@ -33,9 +33,6 @@ public class Intake extends Subsystem {
         //     pivot.setInverted(true);
         // }
     }
-
-    @Override
-    protected void initDefaultCommand() {}
 
     public void setArmsSpeed(double speed) {
         leftArm.set(ControlMode.PercentOutput, speed);
@@ -68,11 +65,11 @@ public class Intake extends Subsystem {
     }
 
     public double getLeftArmCurrent() {
-        return leftArm.getOutputCurrent();
+        return leftArm.getStatorCurrent();
     }
 
     public double getRightArmCurrent() {
-        return rightArm.getOutputCurrent();
+        return rightArm.getStatorCurrent();
     }
 
     public double getUltrasonicDistance() {

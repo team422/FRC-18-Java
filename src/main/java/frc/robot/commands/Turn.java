@@ -1,31 +1,29 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Subsystems;
 
-public class Turn extends Command {
+public class Turn extends CommandBase {
 
     private double degrees;
     private double speed;
-    private double timeout;
     private boolean isCorrecting = false;
 
-
-    public Turn(double Degrees, double Speed, double Timeout){
-        super("Turn");
-        requires(Subsystems.driveBase);
+    public Turn(double Degrees, double Speed) {
+        setName("Turn");
+        addRequirements(Subsystems.driveBase);
         degrees = Degrees;
         speed = Speed;
-        timeout = Timeout;
-        setTimeout(timeout);
     }
 
+    @Override
     public void initialize() {
         Subsystems.driveBase.zeroGyroAngle();
         Subsystems.driveBase.zeroEncoderPosition();
     }
 
+    @Override
     public void execute() {
         if ((degrees > 0) && !isCorrecting) {
             // Turning to the right
@@ -42,6 +40,7 @@ public class Turn extends Command {
         }
     }
 
+    @Override
     public boolean isFinished() {
         double angle = Subsystems.driveBase.getGyroAngle();
         if (degrees > 0) {
@@ -50,26 +49,23 @@ public class Turn extends Command {
                 if (angle > degrees) {
                     isCorrecting = true;
                 }
-                return isTimedOut();
+                return false;
             }
-            return (angle < degrees) || isTimedOut();
+            return (angle < degrees);
         } else {
             // Turning to the left
             if (!isCorrecting) {
                 if (angle < degrees) {
                     isCorrecting = true;
                 }
-                return isTimedOut();
+                return false;
             }
-            return (angle > degrees) || isTimedOut();
+            return (angle > degrees);
         }
     }
 
-    public void interrupted() {
-        Subsystems.driveBase.setMotors(0,0);
-    }
-
-    public void end() {
+    @Override
+    public void end(boolean interrupted) {
         Subsystems.driveBase.setMotors(0,0);
     }
 

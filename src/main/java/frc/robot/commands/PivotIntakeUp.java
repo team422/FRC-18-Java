@@ -1,24 +1,16 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Subsystems;
 
-public class PivotIntakeUp extends Command {
+public class PivotIntakeUp extends CommandBase {
 
     private boolean forTimeOnly;
-    private double time;
 
-    public PivotIntakeUp(boolean ForTimeOnly, double Time) {
-        super("PivotIntakeUp");
-        requires(Subsystems.intake);
+    public PivotIntakeUp(boolean ForTimeOnly) {
+        setName("PivotIntakeUp");
+        addRequirements(Subsystems.intake);
         forTimeOnly = ForTimeOnly;
-        time = Time;
-        setTimeout(time);
-    }
-
-    @Override
-    public void initialize() {
-
     }
 
     @Override
@@ -29,20 +21,14 @@ public class PivotIntakeUp extends Command {
     @Override
     public boolean isFinished() {
         if (forTimeOnly) {
-            return isTimedOut();
+            return false;
         } else {
-            return (Subsystems.intake.getLowerSwitchValue() || isTimedOut());
+            return Subsystems.intake.getLowerSwitchValue();
         }
     }
 
     @Override
-    public void interrupted() {
-
-    }
-
-
-    @Override
-    public void end() {
+    public void end(boolean interrupted) {
         Subsystems.intake.setPivotSpeed(0.0d);
     }
 
