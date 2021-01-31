@@ -77,8 +77,6 @@ public class DriveBase extends SubsystemBase {
         // leftFollower2.follow(leftMasterMotor);
         // rightFollower1.follow(rightMasterMotor);
         // rightFollower2.follow(rightMasterMotor);
-
-        this.setDefaultCommand(new TankDrive());
     }
 
     public void setMotors(double left, double right) {

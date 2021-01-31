@@ -25,6 +25,7 @@ public class Robot extends TimedRobot {
         UserInterface.operatorController.Y.whenPressed(new GuillotineKick()); // kicker kicks out: Y
         UserInterface.operatorController.START.whenPressed(new IntakeBox()); // entire programmed sequence: START
         camera = CameraServer.getInstance().startAutomaticCapture();
+        Subsystems.driveBase.setDefaultCommand(new TankDrive());
         Subsystems.arduino.sendCommand("0001111");
         Subsystems.guillotine.zeroLiftPosition();
     }
