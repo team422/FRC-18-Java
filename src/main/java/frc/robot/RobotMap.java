@@ -19,7 +19,7 @@ public class RobotMap {
     public static final int rightMasterMotor = (compBot) ? 4 : 39;
     public static final int rightFollower1 = (compBot) ? 5 : 42;
     public static final int rightFollower2 = (compBot) ? 6 : 46;
-    public static final int intakePivot = (compBot) ? 43 : 16;
+    public static final int intakePivot = (compBot) ? 46 : 16;
     public static final int intakeLeftArm = (compBot) ? 9 : 12;
     public static final int intakeRightArm = (compBot) ? 10 : 35;
     public static final int lift = (compBot) ? 11 : 56;
