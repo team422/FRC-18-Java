@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,7 +36,7 @@ public class TankDrive extends CommandBase {
             speed = updatedSpeed - maxChangeSpeed;
 
         }
-        speed *= 1;
+        speed *= RobotMap.speedCap;
         updatedSpeed = speed;
 
         double rotation;
@@ -49,7 +50,7 @@ public class TankDrive extends CommandBase {
             rotation = updatedRotation - maxChangeRotation;
 
         }
-        rotation *= 0.7;
+        rotation *= RobotMap.rotationCap;
         updatedRotation = rotation;
         
         SmartDashboard.putNumber("Motor Speed", speed);

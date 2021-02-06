@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
     // Left joystick: rotation
     // Right joystick: forwards and backwards
     // Ensure that guillotine is completely down before beginning START
+    // Operator RB: Toggle Slow/Fast Mode
 
     public void disabledInit() {
         Subsystems.arduino.sendCommand("0001111");

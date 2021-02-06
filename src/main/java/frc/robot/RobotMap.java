@@ -46,5 +46,11 @@ public class RobotMap {
     public static final int launchpad  = 0;
 
 
+    /**
+     * Speed and rotation caps for fast & slow mode (does not affect autonomous)
+     */
+    public static boolean isFastMode = true;
+    public static double speedCap = 1;
+    public static double rotationCap = 0.7;
 
 }
